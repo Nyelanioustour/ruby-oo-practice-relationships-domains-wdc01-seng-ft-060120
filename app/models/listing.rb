@@ -7,17 +7,16 @@ class Listing
         @@all_listings << self
     end
 
-    def guest
-       matching_trips = self.trips
+    def guests
+        matching_trips = self.trips
 
-       matching_guests = matching_trips.map do |trips|
-        trips.guest 
-         end
-
+        matching_trips.map do |trips|
+            trips.guest 
+        end
     end
 
     def trips
-        matching_trips = Trip.all.select do |trip|
+        Trip.all.select do |trip|
             trip.listing == self
            end
     end
@@ -31,21 +30,21 @@ class Listing
     end
 
     def self.all_by_city(city)
-        matching_listing = self.all.select do |listing|
+        self.all.select do |listing|
             listing.city == city
         end
     end
     def self.most_popular
-        
         listing_output = nil
         trip_count = 0
 
         Listing.all.each do |listing|
-            if listing.trip_count >= trip_count
+            if listing.trip_count > trip_count
             trip_count = listing.trip_count
             listing_output = listing
             end
         end
+        listing_output
     end
 
 end

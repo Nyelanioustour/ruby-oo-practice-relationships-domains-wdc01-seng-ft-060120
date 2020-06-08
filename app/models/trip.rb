@@ -6,12 +6,10 @@ class Trip
     def initialize(guest, listing)
         @guest = guest
         @listing = listing
-
         @@all_trips << self
     end
 
     def self.all
        @@all_trips 
     end
-
 end
