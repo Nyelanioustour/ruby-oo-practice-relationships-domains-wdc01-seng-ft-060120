@@ -1,5 +1,5 @@
 class Trip
-    attr_accessor :guest, :listing
+    attr_reader :guest, :listing
 
     @@all_trips = []
 

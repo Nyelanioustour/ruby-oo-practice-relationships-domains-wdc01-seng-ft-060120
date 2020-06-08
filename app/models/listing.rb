@@ -8,9 +8,7 @@ class Listing
     end
 
     def guests
-        matching_trips = self.trips
-
-        matching_trips.map do |trips|
+        self.trips.map do |trips|
             trips.guest 
         end
     end
@@ -18,7 +16,7 @@ class Listing
     def trips
         Trip.all.select do |trip|
             trip.listing == self
-           end
+        end
     end
 
     def trip_count
@@ -34,17 +32,18 @@ class Listing
             listing.city == city
         end
     end
+    
     def self.most_popular
-        listing_output = nil
         trip_count = 0
 
-        Listing.all.each do |listing|
+        self.all.each do |listing|
             if listing.trip_count > trip_count
-            trip_count = listing.trip_count
-            listing_output = listing
+                trip_count = listing.trip_count
             end
         end
-        listing_output
-    end
 
+        self.all.select do |listing|
+            listing.trip_count == trip_count
+        end
+    end
 end

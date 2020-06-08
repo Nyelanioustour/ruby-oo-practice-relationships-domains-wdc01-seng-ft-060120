@@ -1,5 +1,6 @@
 class Guest
-    attr_accessor :name
+    attr_reader :name
+    
     @@all_guests = []
 
     def initialize(name)
@@ -8,15 +9,13 @@ class Guest
     end
 
     def listings
-        matching_trips = self.trips
-
-        matching_trips.collect do |trip|
+        self.trips.collect do |trip|
             trip.listing
         end
     end
 
     def trips
-        matching_trips = Trip.all.select do |trip|
+        Trip.all.select do |trip|
             trip.guest == self
         end
     end
